@@ -103,7 +103,7 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
                         return UIImage()
                     }()
                     
-                    let tempCard = Card(name: name, company: company, profile: profileimage)
+                    let tempCard = Card(name: name, company: company, profileImage: profileimage)
                     cards.append(tempCard)
                     print(cards.count)
                 }

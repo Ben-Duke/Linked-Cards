@@ -8,8 +8,19 @@
 
 import UIKit
 
+
 class CardCellTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    
+    func setUpCard(card: Card){
+        profileImage.image = card.profileImage
+        nameLabel.text = card.name
+        companyLabel.text = card.company
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

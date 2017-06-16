@@ -67,9 +67,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="companyLabel" destination="To3-5E-JRs" id="qCd-Db-7He"/>
-                                            <outlet property="nameLabel" destination="sTP-86-39R" id="gnm-4J-iXW"/>
-                                            <outlet property="profileImage" destination="d6r-FS-YaG" id="sB6-9m-VbX"/>
+                                            <outlet property="companyLabel" destination="To3-5E-JRs" id="b9u-qO-ggO"/>
+                                            <outlet property="nameLabel" destination="sTP-86-39R" id="a2T-rz-RKI"/>
+                                            <outlet property="profileImage" destination="d6r-FS-YaG" id="ug2-oJ-kJb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
