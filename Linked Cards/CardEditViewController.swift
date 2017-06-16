@@ -22,7 +22,7 @@ class CardEditViewController: UIViewController {
     @IBOutlet weak var companyTextField: UITextField!
     
     
-    @IBAction func Savebutton(_ sender: UIBarButtonItem) {
+    @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
 //   Saves to core
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -37,31 +37,27 @@ class CardEditViewController: UIViewController {
             assertionFailure(error.localizedDescription)
         }
         
-        
-        
-     print(1)
-        
         if reloadDel != nil{
             reloadDel?.reloadTable(refresh: true)
-            print(2)
         }
         performSegueReturnBack()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
-    
-    
-    
+   
+    @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
+        performSegueReturnBack()
+    }
+
 }
 extension UIViewController {
     func performSegueReturnBack(){
-        
-        
         
         if let nav = self.navigationController{
             nav.popViewController(animated: true)

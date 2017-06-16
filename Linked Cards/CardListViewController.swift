@@ -12,7 +12,14 @@ import CoreData
 class CardListViewController: UIViewController, triggerReloadDelegate {
     var cards = [Card]()
     
-    
+    @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
+        if let nav = self.navigationController{
+            nav.popViewController(animated: true)
+        }
+        else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     @IBOutlet public weak var tableViewOutlet: UITableView!
     
@@ -25,21 +32,8 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //addSampleCards()
-        
     }
-    
-//    func addSampleCards() {
-//        var demoCardData = [Card]()
-//        
-//        let card1 = Card(name:"Ben Duke", company: "IOS Dev", profile: #imageLiteral(resourceName: "Ben Profile"))
-//        let card2 = Card(name:"Ben Duke", company: "IOS Dev", profile: #imageLiteral(resourceName: "Ben Profile"))
-//        
-//        demoCardData.append(card1)
-//        demoCardData.append(card2)
-//        cards = demoCardData
-//        
-//    }
+
 }
 extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
     
