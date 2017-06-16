@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6041377A1EF1311B0090F6F8 /* CardEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604137791EF1311B0090F6F8 /* CardEditViewController.swift */; };
 		608A06281EEBB119008889ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06271EEBB119008889ED /* AppDelegate.swift */; };
-		608A062A1EEBB119008889ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06291EEBB119008889ED /* ViewController.swift */; };
 		608A062D1EEBB119008889ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608A062B1EEBB119008889ED /* Main.storyboard */; };
 		608A06301EEBB119008889ED /* Linked_Cards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 608A062E1EEBB119008889ED /* Linked_Cards.xcdatamodeld */; };
 		608A06321EEBB119008889ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 608A06311EEBB119008889ED /* Assets.xcassets */; };
 		608A06351EEBB119008889ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608A06331EEBB119008889ED /* LaunchScreen.storyboard */; };
+		608A06731EEBEC64008889ED /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06721EEBEC64008889ED /* CardListViewController.swift */; };
+		608A06751EEBECBE008889ED /* CardCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06741EEBECBE008889ED /* CardCellTableViewCell.swift */; };
+		608A06771EEBED8E008889ED /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06761EEBED8E008889ED /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		604137791EF1311B0090F6F8 /* CardEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardEditViewController.swift; sourceTree = "<group>"; };
 		608A06241EEBB119008889ED /* Linked Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Linked Cards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A06271EEBB119008889ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		608A06291EEBB119008889ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		608A062C1EEBB119008889ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		608A062F1EEBB119008889ED /* Linked_Cards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Linked_Cards.xcdatamodel; sourceTree = "<group>"; };
 		608A06311EEBB119008889ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		608A06341EEBB119008889ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		608A06361EEBB119008889ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		608A06721EEBEC64008889ED /* CardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
+		608A06741EEBECBE008889ED /* CardCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCellTableViewCell.swift; sourceTree = "<group>"; };
+		608A06761EEBED8E008889ED /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +63,15 @@
 			isa = PBXGroup;
 			children = (
 				608A06271EEBB119008889ED /* AppDelegate.swift */,
-				608A06291EEBB119008889ED /* ViewController.swift */,
 				608A062B1EEBB119008889ED /* Main.storyboard */,
 				608A06311EEBB119008889ED /* Assets.xcassets */,
 				608A06331EEBB119008889ED /* LaunchScreen.storyboard */,
 				608A06361EEBB119008889ED /* Info.plist */,
 				608A062E1EEBB119008889ED /* Linked_Cards.xcdatamodeld */,
+				608A06721EEBEC64008889ED /* CardListViewController.swift */,
+				608A06741EEBECBE008889ED /* CardCellTableViewCell.swift */,
+				608A06761EEBED8E008889ED /* Card.swift */,
+				604137791EF1311B0090F6F8 /* CardEditViewController.swift */,
 			);
 			path = "Linked Cards";
 			sourceTree = "<group>";
@@ -140,9 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				608A062A1EEBB119008889ED /* ViewController.swift in Sources */,
+				608A06731EEBEC64008889ED /* CardListViewController.swift in Sources */,
+				608A06771EEBED8E008889ED /* Card.swift in Sources */,
 				608A06301EEBB119008889ED /* Linked_Cards.xcdatamodeld in Sources */,
 				608A06281EEBB119008889ED /* AppDelegate.swift in Sources */,
+				6041377A1EF1311B0090F6F8 /* CardEditViewController.swift in Sources */,
+				608A06751EEBECBE008889ED /* CardCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +320,7 @@
 				608A063B1EEBB119008889ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
