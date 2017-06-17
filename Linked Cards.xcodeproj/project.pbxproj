@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		600E9EB81EF5209200542F7F /* UpdateCardDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600E9EB71EF5209200542F7F /* UpdateCardDatabase.swift */; };
+		600E9EBA1EF5223800542F7F /* LoadFromDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600E9EB91EF5223800542F7F /* LoadFromDatabase.swift */; };
 		6041377A1EF1311B0090F6F8 /* CardEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604137791EF1311B0090F6F8 /* CardEditViewController.swift */; };
+		604137811EF3E3040090F6F8 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604137801EF3E3040090F6F8 /* MenuTableViewCell.swift */; };
+		604137831EF3E5530090F6F8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604137821EF3E5530090F6F8 /* MenuViewController.swift */; };
 		608A06281EEBB119008889ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A06271EEBB119008889ED /* AppDelegate.swift */; };
 		608A062D1EEBB119008889ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608A062B1EEBB119008889ED /* Main.storyboard */; };
 		608A06301EEBB119008889ED /* Linked_Cards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 608A062E1EEBB119008889ED /* Linked_Cards.xcdatamodeld */; };
@@ -19,7 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		600E9EB71EF5209200542F7F /* UpdateCardDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCardDatabase.swift; sourceTree = "<group>"; };
+		600E9EB91EF5223800542F7F /* LoadFromDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFromDatabase.swift; sourceTree = "<group>"; };
 		604137791EF1311B0090F6F8 /* CardEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardEditViewController.swift; sourceTree = "<group>"; };
+		604137801EF3E3040090F6F8 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		604137821EF3E5530090F6F8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		608A06241EEBB119008889ED /* Linked Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Linked Cards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A06271EEBB119008889ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		608A062C1EEBB119008889ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,6 +51,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6041377C1EF3E2400090F6F8 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				608A06271EEBB119008889ED /* AppDelegate.swift */,
+				608A06311EEBB119008889ED /* Assets.xcassets */,
+				608A06331EEBB119008889ED /* LaunchScreen.storyboard */,
+				608A06361EEBB119008889ED /* Info.plist */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		6041377D1EF3E24E0090F6F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				608A06761EEBED8E008889ED /* Card.swift */,
+				600E9EB71EF5209200542F7F /* UpdateCardDatabase.swift */,
+				600E9EB91EF5223800542F7F /* LoadFromDatabase.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6041377E1EF3E2650090F6F8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				608A06721EEBEC64008889ED /* CardListViewController.swift */,
+				604137791EF1311B0090F6F8 /* CardEditViewController.swift */,
+				604137821EF3E5530090F6F8 /* MenuViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		6041377F1EF3E2780090F6F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				608A06741EEBECBE008889ED /* CardCellTableViewCell.swift */,
+				604137801EF3E3040090F6F8 /* MenuTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		608A061B1EEBB119008889ED = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +110,12 @@
 		608A06261EEBB119008889ED /* Linked Cards */ = {
 			isa = PBXGroup;
 			children = (
-				608A06271EEBB119008889ED /* AppDelegate.swift */,
+				6041377C1EF3E2400090F6F8 /* Supporting files */,
 				608A062B1EEBB119008889ED /* Main.storyboard */,
-				608A06311EEBB119008889ED /* Assets.xcassets */,
-				608A06331EEBB119008889ED /* LaunchScreen.storyboard */,
-				608A06361EEBB119008889ED /* Info.plist */,
 				608A062E1EEBB119008889ED /* Linked_Cards.xcdatamodeld */,
-				608A06721EEBEC64008889ED /* CardListViewController.swift */,
-				608A06741EEBECBE008889ED /* CardCellTableViewCell.swift */,
-				608A06761EEBED8E008889ED /* Card.swift */,
-				604137791EF1311B0090F6F8 /* CardEditViewController.swift */,
+				6041377F1EF3E2780090F6F8 /* Views */,
+				6041377D1EF3E24E0090F6F8 /* Model */,
+				6041377E1EF3E2650090F6F8 /* Controllers */,
 			);
 			path = "Linked Cards";
 			sourceTree = "<group>";
@@ -149,12 +193,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				600E9EBA1EF5223800542F7F /* LoadFromDatabase.swift in Sources */,
 				608A06731EEBEC64008889ED /* CardListViewController.swift in Sources */,
 				608A06771EEBED8E008889ED /* Card.swift in Sources */,
+				604137811EF3E3040090F6F8 /* MenuTableViewCell.swift in Sources */,
 				608A06301EEBB119008889ED /* Linked_Cards.xcdatamodeld in Sources */,
 				608A06281EEBB119008889ED /* AppDelegate.swift in Sources */,
 				6041377A1EF1311B0090F6F8 /* CardEditViewController.swift in Sources */,
+				600E9EB81EF5209200542F7F /* UpdateCardDatabase.swift in Sources */,
 				608A06751EEBECBE008889ED /* CardCellTableViewCell.swift in Sources */,
+				604137831EF3E5530090F6F8 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

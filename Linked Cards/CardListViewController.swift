@@ -10,8 +10,13 @@ import UIKit
 import CoreData
 
 class CardListViewController: UIViewController, triggerReloadDelegate {
+    
+    // MARK: Properties
     var cards = [Card]()
     
+    
+    
+    @IBOutlet public weak var tableViewOutlet: UITableView!
     @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
         if let nav = self.navigationController{
             nav.popViewController(animated: true)
@@ -21,12 +26,9 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
         }
     }
     
-    @IBOutlet public weak var tableViewOutlet: UITableView!
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        GetCardsFromCoreData()
+       cards = LoadFromDataBase().GetCardsFromCoreData()
     }
     
     
@@ -36,6 +38,19 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
 
 }
 extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            let cardToDelete = cards[indexPath.row]
+            UpdateCardDatabase().deleteCard(card: cardToDelete)
+            self.cards.remove(at: indexPath.row)
+            self.tableViewOutlet.deleteRows(at: [indexPath], with: .automatic)
+            
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell") as! CardCellTableViewCell
@@ -54,11 +69,11 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func reloadTable(refresh: Bool) {
+        // Purpose is to load the cards and refresh the table with any new updates from Core Data
         if(refresh){
-        GetCardsFromCoreData()
+        cards = LoadFromDataBase().GetCardsFromCoreData()
         self.tableViewOutlet.reloadData()
-        print("refreshed the data")
-        }
+                }
         else{
             print("Was old not to refresh the data")
         }
@@ -70,46 +85,6 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func GetCardsFromCoreData() {
-        ///Core data implementation
-        cards = [Card]()
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        let context = appDel.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
-        request.returnsObjectsAsFaults = false
-        
-        do{
-            let result = try context.fetch(request)
-            if result.count > 0 {
-                for each in result as! [NSManagedObject] {
-                    
-                    let name = each.value(forKey: "name") as? String
-                    
-                    let company = each.value(forKey: "company") as? String
-                    
-                    let profileimage : UIImage = {
-                        
-                        if let image = each.value(forKey: "profileimage") as? NSData {
-                            return UIImage(data: image as Data)!
-                        }
-                        print("couldnt convert it")
-                        return UIImage()
-                    }()
-                    
-                    let tempCard = Card(name: name, company: company, profileImage: profileimage)
-                    cards.append(tempCard)
-                    print(cards.count)
-                }
-            }else{
-                print("Am connecting but no records")
-            }
-        } catch let error{
-            assertionFailure(error.localizedDescription)
-        }
-        
-        
-        ///End///
-
+   
+    
     }
-}
