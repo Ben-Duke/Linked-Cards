@@ -53,4 +53,50 @@ class LoadFromDataBase {
         ///End///
         return cards
     }
+    public func loadSingleCard(with objectId: NSManagedObjectID) -> Card {
+        //Pulls out a single card from the database
+        
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        let context = appDel.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
+        request.returnsObjectsAsFaults = false
+        var cardToReturn : Card?
+        do{
+            let result = try context.fetch(request)
+            if result.count > 0 {
+                for each in result as! [NSManagedObject] {
+                    
+                    if each.objectID == objectId{
+                        let id = each.objectID
+                        
+                        let name = each.value(forKey: "name") as? String
+                        
+                        let company = each.value(forKey: "company") as? String
+                        
+                        let profileimage : UIImage = {
+                            
+                            if let image = each.value(forKey: "profileimage") as? NSData {
+                                return UIImage(data: image as Data)!
+                            }
+                            print("couldnt convert it")
+                            return UIImage()
+                        }()
+                        
+                        let tempCard = Card(referencedId: id, name: name, company: company, profileImage: profileimage)
+                        cardToReturn = tempCard
+                    }
+                }
+                
+            }else{
+                print("Am connecting but no records")
+            }
+        } catch let error{
+            assertionFailure(error.localizedDescription)
+        }
+        
+        return cardToReturn!
+        
+        
+    }
 }

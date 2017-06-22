@@ -14,7 +14,7 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
     // MARK: Properties
     var cards = [Card]()
     
-    
+    var cardIdToPass : NSManagedObjectID?
     
     @IBOutlet public weak var tableViewOutlet: UITableView!
     @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
@@ -35,7 +35,19 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "AddCard" {
+            let addCardDel : CardAddViewController = segue.destination as! CardAddViewController
+            addCardDel.reloadDel = self
+        }
+        else if segue.identifier == "ViewCard" {
+            let viewCardDel : ViewCardDetailsViewController = segue.destination as! ViewCardDetailsViewController
+            
+            viewCardDel.passCardId(cardId: cardIdToPass!)
+        }
+    }
 }
 extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -47,9 +59,7 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
             UpdateCardDatabase().deleteCard(card: cardToDelete)
             self.cards.remove(at: indexPath.row)
             self.tableViewOutlet.deleteRows(at: [indexPath], with: .automatic)
-            
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,9 +73,16 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
         return cards.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 100.0;//Choose your custom row height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0; //Choose custom row height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       //Selection of a cell
+       // idToPass = nil
+        
+        cardIdToPass = cards[indexPath.row].referencedId
+        performSegue(withIdentifier: "ViewCard", sender: self)
     }
     
     func reloadTable(refresh: Bool) {
@@ -78,13 +95,5 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
             print("Was old not to refresh the data")
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditCard" {
-            let targetDel : CardEditViewController = segue.destination as! CardEditViewController
-            targetDel.reloadDel = self
-        }
-    }
-    
-   
-    
+ 
     }

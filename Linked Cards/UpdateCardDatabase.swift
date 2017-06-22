@@ -51,7 +51,7 @@ class UpdateCardDatabase {
     }
     ///////////////////////////
     
-    public func EditCard(card:Card){
+    public func EditCard(card:Card, valuesToEdit: [String]){
         let appDel = UIApplication.shared.delegate as! AppDelegate
         let context = appDel.persistentContainer.viewContext
         
@@ -66,7 +66,8 @@ class UpdateCardDatabase {
                     print("checking")
                     if entry.objectID == card.referencedId! {
                         print("found it")
-                        entry.setValue("Updated Name", forKey: "name")
+                        entry.setValue(valuesToEdit[0], forKey: "name")
+                        entry.setValue(valuesToEdit[1], forKey: "company")
                         do{
                             try context.save()
                             

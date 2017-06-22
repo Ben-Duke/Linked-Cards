@@ -10,15 +10,17 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
-    let menuLabelArray = ["My Cards", "My Contact Card"]
-    
-    
-    
+    let menuLabelArray = ["MyCards", "MyCard"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MyCards" {
+            let _ : CardListViewController = segue.destination as! CardListViewController
+        }
     }
 
 }
@@ -30,6 +32,11 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
         cell.setUpMenu(labelText: menuLabelArray[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: menuLabelArray[indexPath.row], sender: self)
+        print(menuLabelArray[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
