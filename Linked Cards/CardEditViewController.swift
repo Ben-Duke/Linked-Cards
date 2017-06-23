@@ -12,6 +12,13 @@ import CoreData
 protocol triggerReloadDelegate {
     func reloadTable(refresh: Bool)
 }
+/*
+ Still Todo:
+ have it so that when selecting a card on the list view
+ load the fields from the card
+ 
+ Send the card then keep the id then save? an Idea
+*/
 
 class CardEditViewController: UIViewController {
     
@@ -23,38 +30,21 @@ class CardEditViewController: UIViewController {
     
     
     @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
-//   Saves to core
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let newCard = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
-        
-        newCard.setValue(nameTextfield.text, forKey: "name")
-        newCard.setValue(companyTextField.text, forKey: "company")
-        
-        do {
-            try context.save()
-        } catch let error {
-            assertionFailure(error.localizedDescription)
-        }
-        
+
+        UpdateCardDatabase().saveCard(name: nameTextfield.text!, company: companyTextField.text!)
         if reloadDel != nil{
             reloadDel?.reloadTable(refresh: true)
         }
         performSegueReturnBack()
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
-   
     @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
         performSegueReturnBack()
     }
-
 }
 extension UIViewController {
     func performSegueReturnBack(){

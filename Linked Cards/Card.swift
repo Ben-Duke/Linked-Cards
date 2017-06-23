@@ -13,11 +13,13 @@ class Card : NSObject {
     let name: String?
     let company: String?
     let profileImage : UIImage?
+    let referencedId : NSManagedObjectID?
     
-    init(name:String?, company: String?, profileImage: UIImage?) {
+    init(referencedId: NSManagedObjectID?, name:String?, company: String?, profileImage: UIImage?) {
         self.name = name
         self.company = company
         self.profileImage = profileImage
+        self.referencedId = referencedId
     }
     
 }
