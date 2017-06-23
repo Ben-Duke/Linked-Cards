@@ -9,20 +9,24 @@
 import UIKit
 import CoreData
 
-protocol triggerReloadDelegate {
-    func reloadTable(refresh: Bool)
-}
-/*
- Still Todo:
- have it so that when selecting a card on the list view
- load the fields from the card
- 
- Send the card then keep the id then save? an Idea
-*/
+//protocol triggerReloadDelegate {
+//    func reloadTable(refresh: Bool)
+//}
 
-class CardEditViewController: UIViewController {
+protocol editDetailDelegate {
+    func passCardId(cardId : NSManagedObjectID)
+}
+
+class CardEditViewController: UIViewController , editDetailDelegate {
     
-    var reloadDel : triggerReloadDelegate? = nil
+    var card : Card?
+    func passCardId(cardId: NSManagedObjectID) {
+        card = LoadFromDataBase().loadSingleCard(with: cardId)
+    }
+    
+    
+    var editDel : editDetailDelegate? = nil
+    var reloadViewCardDel : viewDetailDelegate? = nil
     
     // MARK: Properties
     @IBOutlet weak var nameTextfield: UITextField!
@@ -30,29 +34,42 @@ class CardEditViewController: UIViewController {
     
     
     @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
-
-        UpdateCardDatabase().saveCard(name: nameTextfield.text!, company: companyTextField.text!)
-        if reloadDel != nil{
-            reloadDel?.reloadTable(refresh: true)
+        
+        //UpdateCardDatabase().saveCard(name: nameTextfield.text!, company: companyTextField.text!)
+        UpdateCardDatabase().EditCard(card: card!, valuesToEdit: [nameTextfield.text!, companyTextField.text!])
+                if reloadViewCardDel != nil{
+                    print("not nil just not working")
+                     reloadViewCardDel?.passCardId(cardId: (card?.referencedId)!)
+                }
+                else{
+                    print("looks to be nil")
         }
+       
         performSegueReturnBack()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("In edit view")
+        nameTextfield.text = card?.name
+        companyTextField.text = card?.company
     }
     
     @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
         performSegueReturnBack()
     }
-}
-extension UIViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
     func performSegueReturnBack(){
+        
         
         if let nav = self.navigationController{
             nav.popViewController(animated: true)
         }else{
             self.dismiss(animated: true, completion: nil)
         }
+        
     }
 }
