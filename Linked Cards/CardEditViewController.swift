@@ -35,8 +35,7 @@ class CardEditViewController: UIViewController , editDetailDelegate {
     
     @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
         
-        //UpdateCardDatabase().saveCard(name: nameTextfield.text!, company: companyTextField.text!)
-        UpdateCardDatabase().EditCard(card: card!, valuesToEdit: [nameTextfield.text!, companyTextField.text!])
+            UpdateCardDatabase().EditCard(card: card!, valuesToEdit: [nameTextfield.text!, companyTextField.text!])
                 if reloadViewCardDel != nil{
                     print("not nil just not working")
                      reloadViewCardDel?.passCardId(cardId: (card?.referencedId)!)
@@ -51,7 +50,7 @@ class CardEditViewController: UIViewController , editDetailDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("In edit view")
-        nameTextfield.text = card?.name
+        nameTextfield.text = card?.firstName
         companyTextField.text = card?.company
     }
     

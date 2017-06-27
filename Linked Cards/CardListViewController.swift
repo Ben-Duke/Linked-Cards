@@ -28,7 +28,9 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
        cards = LoadFromDataBase().GetCardsFromCoreData()
+        
     }
     
     
@@ -44,7 +46,7 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
         }
         else if segue.identifier == "ViewCard" {
             let viewCardDel : ViewCardDetailsViewController = segue.destination as! ViewCardDetailsViewController
-            
+            viewCardDel.reloadDel = self
             viewCardDel.passCardId(cardId: cardIdToPass!)
         }
     }
@@ -74,7 +76,7 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0; //Choose custom row height
+        return 140.0; //Choose custom row height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -26,23 +26,17 @@ class LoadFromDataBase {
                 for each in result as! [NSManagedObject] {
                     
                     let id = each.objectID
-                    
-                    let name = each.value(forKey: "name") as? String
-                    
+                    let firstname = each.value(forKey: "firstname") as? String
+                    let lastname = each.value(forKey: "lastname") as? String
                     let company = each.value(forKey: "company") as? String
+                    let email = each.value(forKey: "email") as? String
+                    let phone = each.value(forKey: "phone") as? String
                     
-                    let profileimage : UIImage = {
-                        
-                        if let image = each.value(forKey: "profileimage") as? NSData {
-                            return UIImage(data: image as Data)!
-                        }
-                        print("couldnt convert it")
-                        return UIImage()
-                    }()
                     
-                    let tempCard = Card(referencedId: id, name: name, company: company, profileImage: profileimage)
+                    
+                    let tempCard = Card(referencedId: id, firstName: firstname, lastName: lastname, company: company, email: email, phone: phone)
                     cards.append(tempCard)
-                    print(cards.count)
+                    
                 }
             }else{
                 print("Am connecting but no records")
@@ -68,22 +62,15 @@ class LoadFromDataBase {
                 for each in result as! [NSManagedObject] {
                     
                     if each.objectID == objectId{
+                        
                         let id = each.objectID
-                        
-                        let name = each.value(forKey: "name") as? String
-                        
+                        let firstname = each.value(forKey: "firstname") as? String
+                        let lastname = each.value(forKey: "lastname") as? String
                         let company = each.value(forKey: "company") as? String
+                        let email = each.value(forKey: "email") as? String
+                        let phone = each.value(forKey: "phone") as? String
                         
-                        let profileimage : UIImage = {
-                            
-                            if let image = each.value(forKey: "profileimage") as? NSData {
-                                return UIImage(data: image as Data)!
-                            }
-                            print("couldnt convert it")
-                            return UIImage()
-                        }()
-                        
-                        let tempCard = Card(referencedId: id, name: name, company: company, profileImage: profileimage)
+                        let tempCard = Card(referencedId: id, firstName: firstname, lastName: lastname, company: company, email: email, phone: phone)
                         cardToReturn = tempCard
                     }
                 }

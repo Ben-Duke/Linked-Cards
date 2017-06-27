@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
-    let menuLabelArray = ["MyCards", "MyCard"]
+    let menuLabelArray = ["MyCards", "MyCard", "CardSwap"]
 
     
     override func viewDidLoad() {
@@ -20,6 +20,9 @@ class MenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MyCards" {
             let _ : CardListViewController = segue.destination as! CardListViewController
+        }
+        else if segue.identifier == "CardSwap" {
+            let _ : CardSwapViewController = segue.destination as! CardSwapViewController
         }
     }
 
@@ -36,7 +39,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: menuLabelArray[indexPath.row], sender: self)
-        print(menuLabelArray[indexPath.row])
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

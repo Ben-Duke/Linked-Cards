@@ -9,39 +9,61 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol CardSwapBLEModelDelegate{
-    func connectedDevicesChanged(managed : CardSwapBLEModel, conectedDevices: [String] )
-    func SwapCard(manager : CardSwapBLEModel, cardToSwap: Card)
+
+protocol CardSwapServiceManagerDelegate {
+    
+    func connectedDevicesChanged(manager : CardSwapBLEModel, connectedDevices: [String])
+    func CardSwapfunc(manager : CardSwapBLEModel, cardToSwap: String)
+    
 }
 
-class CardSwapBLEModel: NSObject {
-    // Service type must be a unique string, at most 15 characters long
-    // and can contain only ASCII lowercase letters, numbers and hyphens.
-    private let ColorServiceType = "example-colour"
+class CardSwapBLEModel : NSObject {
     
-    public let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    private let CardSwapServiceType = "CardSwap"
+    
+    private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     private let serviceBrowser : MCNearbyServiceBrowser
     
-    var delegate : CardSwapBLEModelDelegate?
+    var delegate : CardSwapServiceManagerDelegate?
     
     lazy var session : MCSession = {
-        let session =  MCSession(peer: self.myPeerId , securityIdentity: nil, encryptionPreference: .required)
-        session.delegate = self as? MCSessionDelegate
+        let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .none)
+        session.delegate = self as MCSessionDelegate
         return session
     }()
     
+    func stopBrowsingForConnections() {
+        self.serviceBrowser.stopBrowsingForPeers()
+    }
+    
     override init() {
-        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: ColorServiceType)
-        self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: ColorServiceType)
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: CardSwapServiceType)
+        self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: CardSwapServiceType)
         
         super.init()
         
-        self.serviceAdvertiser.delegate = self as? MCNearbyServiceAdvertiserDelegate
+        self.serviceAdvertiser.delegate = self as MCNearbyServiceAdvertiserDelegate
         self.serviceAdvertiser.startAdvertisingPeer()
         
-        self.serviceBrowser.delegate = self as? MCNearbyServiceBrowserDelegate
+        self.serviceBrowser.delegate = self as MCNearbyServiceBrowserDelegate
         self.serviceBrowser.startBrowsingForPeers()
+    }
+    
+    func send(cardJSON : String) {
+        NSLog("%@", "sendCard: \(cardJSON) to \(session.connectedPeers.count) peers")
+        
+        if session.connectedPeers.count > 0 {
+            do {
+                
+                try self.session.send(cardJSON.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            }
+            catch let error {
+                NSLog("%@", "Error for sending: \(error)")
+            }
+        }
+        
     }
     
     deinit {
@@ -49,16 +71,82 @@ class CardSwapBLEModel: NSObject {
         self.serviceBrowser.stopBrowsingForPeers()
     }
     
-    func sendCard(card : Card) {
-        NSLog("%@", "sendCard \(card.name)) to \(session.connectedPeers.count) peers")
-        
-        if session.connectedPeers.count > 0 {
-            do {
-                try self.session.send(, toPeers: session.connectedPeers, with: .reliable)
-            } catch let error {
-                NSLog("%@", "Error for sending: \(error)")
-            }
+}
+
+extension CardSwapBLEModel : MCNearbyServiceAdvertiserDelegate {
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        invitationHandler(true, self.session)
+    }
+    
+}
+
+extension CardSwapBLEModel : MCNearbyServiceBrowserDelegate {
+    
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        NSLog("%@", "foundPeer: \(peerID)")
+        NSLog("%@", "invitePeer: \(peerID)")
+        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        NSLog("%@", "lostPeer: \(peerID)")
+    }
+    
+}
+
+extension CardSwapBLEModel : MCSessionDelegate {
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+            self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
+            
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
         }
+ 
+        self.delegate?.connectedDevicesChanged(manager: self, connectedDevices:
+            session.connectedPeers.map{$0.displayName})
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveData: \(data)")
+
+        let cardJson = String(data: data, encoding: .utf8)!
+        print(1)
+        self.delegate?.CardSwapfunc(manager: self, cardToSwap: cardJson )
+        
+        var saveCard = Card(referencedId: nil, firstName: nil, lastName: nil,company: nil, email: nil, phone: nil)
+           saveCard = saveCard.jsonToCard(cardJson: cardJson)
+        
+        UpdateCardDatabase().saveCard(firstname: saveCard.firstName!, lastname: saveCard.lastName!, company: saveCard.company!, email: saveCard.email!, phone: saveCard.phone!)
+        print("would send to core data")
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        NSLog("%@", "didReceiveStream")
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        NSLog("%@", "didStartReceivingResourceWithName")
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+        NSLog("%@", "didFinishReceivingResourceWithName")
     }
     
 }

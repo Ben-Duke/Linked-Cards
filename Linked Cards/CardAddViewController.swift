@@ -24,13 +24,13 @@ class CardAddViewController: UIViewController {
     
     @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
         
-        UpdateCardDatabase().saveCard(name: nameTextfield.text!, company: companyTextField.text!)
+        UpdateCardDatabase().saveCard(firstname: nameTextfield.text!, lastname: "", company: companyTextField.text!, email: "", phone: "")
         print("starting")
         if reloadDel != nil{
             reloadDel?.reloadTable(refresh: true)
             print(1)
         }
-        print("Apears delegate is nil")
+        //print("Apears delegate is nil")
         performSegueReturnBack()
     }
     

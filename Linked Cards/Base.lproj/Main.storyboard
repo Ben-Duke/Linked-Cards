@@ -6,11 +6,49 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Card Swap View Controller-->
+        <scene sceneID="muG-ij-to1">
+            <objects>
+                <viewController id="VVS-pd-Uc8" customClass="CardSwapViewController" customModule="Linked_Cards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tEA-PE-xR0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ujw-QK-qMY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lBU-AP-Hbv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ready?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU5-cl-oEd">
+                                <rect key="frame" x="46" y="110" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrR-3X-fL5">
+                                <rect key="frame" x="29" y="262" width="251" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send Card JSON"/>
+                                <connections>
+                                    <action selector="sendCardJSONAction:" destination="VVS-pd-Uc8" eventType="touchUpInside" id="1Yo-Oy-Vbm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="SendJsonButton" destination="CrR-3X-fL5" id="Mf5-2G-Ymi"/>
+                        <outlet property="readyLabel" destination="SU5-cl-oEd" id="U4v-8K-jVk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UGD-i7-qWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964" y="-345"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="ZBy-mS-3Oh">
             <objects>
@@ -70,6 +108,7 @@
                     <connections>
                         <segue destination="U4N-1T-vah" kind="show" identifier="MyCard" id="48z-Fg-VaC"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="MyCards" id="kt9-3h-CAr"/>
+                        <segue destination="VVS-pd-Uc8" kind="show" identifier="CardSwap" id="drP-hh-QYs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYv-lT-wdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,49 +149,85 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" rowHeight="115" id="s2l-bm-ihC" customClass="CardCellTableViewCell" customModule="Linked_Cards" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="115"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" rowHeight="140" id="s2l-bm-ihC" customClass="CardCellTableViewCell" customModule="Linked_Cards" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s2l-bm-ihC" id="mlD-QU-7qI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d6r-FS-YaG" userLabel="ProfileImage">
-                                                    <rect key="frame" x="18" y="8" width="118" height="98.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="d6r-FS-YaG" secondAttribute="height" multiplier="59:49" id="tza-YX-qYT"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTP-86-39R" userLabel="NameLabel">
-                                                    <rect key="frame" x="148" y="8" width="42" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="H5a-xm-Tro"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To3-5E-JRs" userLabel="CompanyLabel">
-                                                    <rect key="frame" x="148" y="60" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="dWm-8H-Akq">
+                                                    <rect key="frame" x="18" y="18.5" width="184" height="103"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTP-86-39R" userLabel="FirstNameLabel">
+                                                            <rect key="frame" x="0.0" y="0.0" width="53" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="ujg-zr-QnS"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aym-TO-Nd0" userLabel="LastNameLabel">
+                                                            <rect key="frame" x="0.0" y="26" width="52" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="wkS-OB-RmY"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To3-5E-JRs" userLabel="CompanyLabel">
+                                                            <rect key="frame" x="0.0" y="52" width="77" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="pJ7-FK-JHN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0v-19-ncO" userLabel="Email">
+                                                            <rect key="frame" x="0.0" y="78" width="49.5" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="68e-T3-u8m"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yU-fw-a7a">
+                                                    <rect key="frame" x="212" y="106.5" width="155" height="25"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsD-Yi-xU2" userLabel="Phone">
+                                                            <rect key="frame" x="0.0" y="0.0" width="155" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="G7M-Cd-9K1"/>
+                                                                <constraint firstAttribute="width" constant="155" id="VHq-Zk-rYa"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="To3-5E-JRs" firstAttribute="leading" secondItem="d6r-FS-YaG" secondAttribute="trailing" constant="12" id="6a1-hn-4db"/>
-                                                <constraint firstItem="To3-5E-JRs" firstAttribute="top" secondItem="sTP-86-39R" secondAttribute="bottom" constant="8" id="8mn-bh-mba"/>
-                                                <constraint firstItem="sTP-86-39R" firstAttribute="top" secondItem="mlD-QU-7qI" secondAttribute="topMargin" id="FAU-9G-Cts"/>
-                                                <constraint firstItem="d6r-FS-YaG" firstAttribute="leading" secondItem="mlD-QU-7qI" secondAttribute="leadingMargin" constant="10" id="JdO-tV-vKN"/>
-                                                <constraint firstItem="sTP-86-39R" firstAttribute="leading" secondItem="d6r-FS-YaG" secondAttribute="trailing" constant="12" id="faq-Pe-2Rx"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="d6r-FS-YaG" secondAttribute="bottom" id="kPK-08-fpt"/>
-                                                <constraint firstItem="d6r-FS-YaG" firstAttribute="top" secondItem="mlD-QU-7qI" secondAttribute="topMargin" id="qfk-Kr-90W"/>
+                                                <constraint firstItem="dWm-8H-Akq" firstAttribute="top" secondItem="mlD-QU-7qI" secondAttribute="topMargin" constant="10" id="HH1-Wj-k6U"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="5yU-fw-a7a" secondAttribute="bottom" id="QCg-5G-JTD"/>
+                                                <constraint firstItem="dWm-8H-Akq" firstAttribute="leading" secondItem="mlD-QU-7qI" secondAttribute="leadingMargin" constant="10" id="W1d-H1-ccw"/>
+                                                <constraint firstItem="5yU-fw-a7a" firstAttribute="leading" secondItem="dWm-8H-Akq" secondAttribute="trailing" constant="10" id="ktR-Fb-d9u"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dWm-8H-Akq" secondAttribute="bottom" constant="10" id="rYk-OD-cD4"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="5yU-fw-a7a" secondAttribute="trailing" id="woC-gA-IxP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="companyLabel" destination="To3-5E-JRs" id="b9u-qO-ggO"/>
-                                            <outlet property="nameLabel" destination="sTP-86-39R" id="a2T-rz-RKI"/>
-                                            <outlet property="profileImage" destination="d6r-FS-YaG" id="ug2-oJ-kJb"/>
+                                            <outlet property="companyLabel" destination="To3-5E-JRs" id="lzi-88-43r"/>
+                                            <outlet property="emailLabel" destination="d0v-19-ncO" id="K4a-bH-7wA"/>
+                                            <outlet property="firstNameLabel" destination="sTP-86-39R" id="HIo-Br-5B5"/>
+                                            <outlet property="lastNameLabel" destination="Aym-TO-Nd0" id="hp2-da-Cy8"/>
+                                            <outlet property="phoneLabel" destination="qsD-Yi-xU2" id="IbP-W1-Xif"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -189,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2002" y="139"/>
+            <point key="canvasLocation" x="1964" y="537.48125937031489"/>
         </scene>
         <!--Add a Card-->
         <scene sceneID="37I-Ar-U5c">
@@ -239,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dkn-9s-fPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2801" y="-209"/>
+            <point key="canvasLocation" x="2743" y="-210"/>
         </scene>
         <!--Card Details-->
         <scene sceneID="3Sh-Rh-wdp">

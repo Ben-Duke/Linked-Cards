@@ -11,8 +11,7 @@ import CoreData
 
 class UpdateCardDatabase {
     public func deleteCard(card:Card){
-        // insert deletion from db
-        //        print ("would have deleted")
+        // Deletion from db
         let appDel = UIApplication.shared.delegate as! AppDelegate
         let context = appDel.persistentContainer.viewContext
         
@@ -66,8 +65,11 @@ class UpdateCardDatabase {
                     print("checking")
                     if entry.objectID == card.referencedId! {
                         print("found it")
-                        entry.setValue(valuesToEdit[0], forKey: "name")
-                        entry.setValue(valuesToEdit[1], forKey: "company")
+                        entry.setValue(valuesToEdit[0], forKey: "firstname")
+                        entry.setValue(valuesToEdit[1], forKey: "lastname")
+                        entry.setValue(valuesToEdit[2], forKey: "company")
+                        entry.setValue(valuesToEdit[3], forKey: "email")
+                        entry.setValue(valuesToEdit[4], forKey: "phone")
                         do{
                             try context.save()
                             
@@ -86,14 +88,18 @@ class UpdateCardDatabase {
         }
         
     }
+    
 ///////////////////////
-    func saveCard(name: String, company: String) {
+    func saveCard(firstname: String, lastname: String, company: String, email: String, phone: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let newCard = NSEntityDescription.insertNewObject(forEntityName: "Card", into: context)
         
-        newCard.setValue(name, forKey: "name")
+        newCard.setValue(firstname, forKey: "firstname")
+        newCard.setValue(lastname, forKey: "lastname")
         newCard.setValue(company, forKey: "company")
+        newCard.setValue(email, forKey: "email")
+        newCard.setValue(phone, forKey: "phone")
         
         do {
             try context.save()

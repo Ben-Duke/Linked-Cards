@@ -29,17 +29,24 @@ class ViewCardDetailsViewController: UIViewController, viewDetailDelegate{
     @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
         
         if reloadDel != nil{
-            reloadDel?.reloadTable(refresh: true)
-            print(1)
+            reloadDel!.reloadTable(refresh: true)
+            
+            print("404")
+
         }
+        
         performSegueReturnBack()
+        
     }
         
     
     override func viewDidLoad() {
             super.viewDidLoad()
+        if reloadDel != nil {
+            print("not nil")
+        }
             updateUI()
-        
+            
         }
         
         
@@ -54,15 +61,16 @@ class ViewCardDetailsViewController: UIViewController, viewDetailDelegate{
         
         func passCardId(cardId: NSManagedObjectID) {
             viewCard = LoadFromDataBase().loadSingleCard(with: cardId)
-            print(viewCard?.name)
+
             if nameLabel != nil{
                 updateUI()
             }
+            reloadDel?.reloadTable(refresh: true)
         }
     
     func updateUI() {
-        if viewCard?.name != nil {
-            nameLabel!.text = viewCard!.name
+        if viewCard?.firstName != nil {
+            nameLabel!.text = viewCard!.firstName
             companyLabel!.text = viewCard!.company
         }else{
             print(404)
@@ -73,9 +81,7 @@ extension ViewCardDetailsViewController{
     
     
     fileprivate func performSegueReturnBack(){
-        
         if let nav = self.navigationController{
-          //  CardEditViewController.reloadViewCard = self
             nav.popViewController(animated: true)
         }else{
             self.dismiss(animated: true, completion: nil)

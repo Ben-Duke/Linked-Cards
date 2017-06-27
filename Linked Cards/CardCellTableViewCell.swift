@@ -11,19 +11,28 @@ import UIKit
 
 class CardCellTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+    
     
     func setUpCard(card: Card){
-        profileImage.image = card.profileImage
-        nameLabel.text = card.name
+        firstNameLabel.text = card.firstName
+        lastNameLabel.text = card.lastName
         companyLabel.text = card.company
+        emailLabel.text = card.email
+        phoneLabel.text = card.phone
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.layer.cornerRadius = 5
+        self.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
