@@ -29,7 +29,7 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       cards = LoadFromDataBase().GetCardsFromCoreData()
+        cards = LoadFromDataBase().GetCardsFromCoreData()
         
     }
     
@@ -44,10 +44,12 @@ class CardListViewController: UIViewController, triggerReloadDelegate {
             let addCardDel : CardAddViewController = segue.destination as! CardAddViewController
             addCardDel.reloadDel = self
         }
-        else if segue.identifier == "ViewCard" {
-            let viewCardDel : ViewCardDetailsViewController = segue.destination as! ViewCardDetailsViewController
-            viewCardDel.reloadDel = self
-            viewCardDel.passCardId(cardId: cardIdToPass!)
+        else if segue.identifier == "EditCard" {
+            let editDel : CardEditViewController = segue.destination as! CardEditViewController
+            
+            editDel.reloadDel = self
+            editDel.editDel = self as? editDetailDelegate
+            editDel.passCardId(cardId: cardIdToPass!)
         }
     }
 }
@@ -80,22 +82,22 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       //Selection of a cell
-       // idToPass = nil
+        //Selection of a cell
+        // idToPass = nil
         
         cardIdToPass = cards[indexPath.row].referencedId
-        performSegue(withIdentifier: "ViewCard", sender: self)
+        performSegue(withIdentifier: "EditCard", sender: self)
     }
     
     func reloadTable(refresh: Bool) {
         // Purpose is to load the cards and refresh the table with any new updates from Core Data
         if(refresh){
-        cards = LoadFromDataBase().GetCardsFromCoreData()
-        self.tableViewOutlet.reloadData()
-                }
+            cards = LoadFromDataBase().GetCardsFromCoreData()
+            self.tableViewOutlet.reloadData()
+        }
         else{
             print("Was old not to refresh the data")
         }
     }
- 
-    }
+    
+}

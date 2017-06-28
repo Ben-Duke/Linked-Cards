@@ -18,25 +18,27 @@ class CardAddViewController: UIViewController {
     var reloadDel : triggerReloadDelegate? = nil
     
     // MARK: Properties
-    @IBOutlet weak var nameTextfield: UITextField!
+   
+    @IBOutlet weak var firstNameTextLabel: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
     
     
     @IBAction func savebuttonAction(_ sender: UIBarButtonItem) {
         
-        UpdateCardDatabase().saveCard(firstname: nameTextfield.text!, lastname: "", company: companyTextField.text!, email: "", phone: "")
-        print("starting")
+        UpdateCardDatabase().saveCard(firstname: firstNameTextLabel.text!, lastname: lastNameTextField.text!, company: companyTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!)
+        
         if reloadDel != nil{
             reloadDel?.reloadTable(refresh: true)
-            print(1)
+            
         }
-        //print("Apears delegate is nil")
         performSegueReturnBack()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("In edit view")
     }
     
     @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {

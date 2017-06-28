@@ -22,16 +22,14 @@ class Card : NSObject {
     
 
     func CardToDictionary() -> [String : Any] {
-        let dictionary: [String: Any] = ["firstname":self.firstName, "lastname":self.lastName, "company":self.company, "email":self.email, "phone":self.phone]
+        let dictionary: [String: Any] = ["firstname": self.firstName!, "lastname":self.lastName!, "company":self.company!, "email":self.email!, "phone":self.phone!]
         return dictionary
     }
     
     func jsonToCard(cardJson: String) -> Card{
         
         var jsonarray = JsonToDictionary(text: cardJson)
-        print(jsonarray as? String)
-        print(jsonarray!["name"])
-        return Card(referencedId: nil, firstName: jsonarray!["firstname"] as! String, lastName: jsonarray!["lastname"] as! String, company: jsonarray!["company"] as! String, email: jsonarray!["email"] as! String, phone: jsonarray!["phone"] as? String)
+        return Card(referencedId: nil, firstName: jsonarray!["firstname"] as? String, lastName: jsonarray!["lastname"] as? String, company: jsonarray!["company"] as? String, email: jsonarray!["email"] as? String, phone: jsonarray!["phone"] as? String)
     }
     
     func JsonToDictionary(text: String) -> [String: Any]? {
