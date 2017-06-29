@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="a4B-zS-ZbL">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,35 +20,60 @@
                         <viewControllerLayoutGuide type="bottom" id="Ujw-QK-qMY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lBU-AP-Hbv">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ready?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU5-cl-oEd">
-                                <rect key="frame" x="46" y="110" width="56" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU5-cl-oEd">
+                                <rect key="frame" x="10" y="211" width="355" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="L39-ZM-zNa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBoldItalic" family="Avenir Next" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrR-3X-fL5">
-                                <rect key="frame" x="29" y="262" width="251" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Card JSON"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CrR-3X-fL5">
+                                <rect key="frame" x="50" y="291" width="275" height="85"/>
+                                <color key="backgroundColor" red="0.93345773200000004" green="1" blue="0.98585641989999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CrR-3X-fL5" secondAttribute="height" multiplier="55:17" id="4un-35-3ER"/>
+                                    <constraint firstAttribute="height" constant="85" id="UfW-cl-RL9"/>
+                                    <constraint firstAttribute="width" constant="275" id="m6u-JC-0cI"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Swap My card">
+                                            <attributes>
+                                                <font key="NSFont" size="24" name="AvenirNext-DemiBoldItalic"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="sendCardJSONAction:" destination="VVS-pd-Uc8" eventType="touchUpInside" id="1Yo-Oy-Vbm"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="top" secondItem="SU5-cl-oEd" secondAttribute="bottom" constant="54" id="9Kg-6C-MMq"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leadingMargin" constant="34" id="HPd-pD-jO7"/>
+                            <constraint firstItem="SU5-cl-oEd" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leading" constant="10" id="I7B-Cl-peC"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerY" secondItem="lBU-AP-Hbv" secondAttribute="centerY" id="Pmo-8d-LRo"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerX" secondItem="SU5-cl-oEd" secondAttribute="centerX" id="Qvt-R5-BhO"/>
+                            <constraint firstAttribute="trailing" secondItem="SU5-cl-oEd" secondAttribute="trailing" constant="10" id="Wd3-DP-r6D"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="top" secondItem="SU5-cl-oEd" secondAttribute="bottom" constant="54" id="c6U-z2-gza"/>
+                            <constraint firstItem="Ujw-QK-qMY" firstAttribute="top" secondItem="CrR-3X-fL5" secondAttribute="bottom" constant="291" id="vH3-S1-saU"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="SendJsonButton" destination="CrR-3X-fL5" id="Mf5-2G-Ymi"/>
-                        <outlet property="readyLabel" destination="SU5-cl-oEd" id="U4v-8K-jVk"/>
+                        <outlet property="readyLabel" destination="SU5-cl-oEd" id="PfO-aF-cRw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGD-i7-qWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="-345"/>
+            <point key="canvasLocation" x="1964" y="-345.87706146926541"/>
         </scene>
         <!--Home-->
         <scene sceneID="ZBy-mS-3Oh">
@@ -58,22 +84,22 @@
                         <viewControllerLayoutGuide type="bottom" id="jgs-uQ-s1R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zz9-qh-gwd">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WPz-kZ-ypn">
-                                <rect key="frame" x="0.0" y="64" width="667" height="311"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemCell" id="5he-qm-Fof" customClass="MenuTableViewCell" customModule="Linked_Cards" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="667" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5he-qm-Fof" id="PfT-qm-ufz">
-                                            <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpT-d4-S4Q" userLabel="Item Label">
-                                                    <rect key="frame" x="10" y="11.5" width="647" height="20.5"/>
+                                                    <rect key="frame" x="10" y="11.5" width="355" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -106,32 +132,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="jKL-2e-fcn"/>
                     <connections>
-                        <segue destination="U4N-1T-vah" kind="show" identifier="MyCard" id="48z-Fg-VaC"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="MyCards" id="kt9-3h-CAr"/>
                         <segue destination="VVS-pd-Uc8" kind="show" identifier="CardSwap" id="drP-hh-QYs"/>
+                        <segue destination="tGV-Op-ds4" kind="show" identifier="MyCard" id="6t6-Gh-L9W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYv-lT-wdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1166" y="139"/>
-        </scene>
-        <!--My Card View Controller-->
-        <scene sceneID="sso-Ew-3m1">
-            <objects>
-                <viewController id="U4N-1T-vah" customClass="MyCardViewController" customModule="Linked_Cards" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6yG-Ko-nDc"/>
-                        <viewControllerLayoutGuide type="bottom" id="8I3-Zh-f55"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="y78-ez-0T8">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tds-XW-LgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1166" y="944"/>
         </scene>
         <!--My Cards-->
         <scene sceneID="tne-QT-ifu">
@@ -142,22 +150,22 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyc-XB-txP">
-                                <rect key="frame" x="0.0" y="64" width="667" height="311"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" rowHeight="140" id="s2l-bm-ihC" customClass="CardCellTableViewCell" customModule="Linked_Cards" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="667" height="140"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s2l-bm-ihC" id="mlD-QU-7qI">
-                                            <rect key="frame" x="0.0" y="0.0" width="667" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="dWm-8H-Akq">
-                                                    <rect key="frame" x="18" y="18.5" width="476" height="103"/>
+                                                    <rect key="frame" x="18" y="18.5" width="184" height="103"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTP-86-39R" userLabel="FirstNameLabel">
                                                             <rect key="frame" x="0.0" y="0.0" width="53" height="25"/>
@@ -198,7 +206,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yU-fw-a7a">
-                                                    <rect key="frame" x="504" y="106.5" width="155" height="25"/>
+                                                    <rect key="frame" x="212" y="106.5" width="155" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsD-Yi-xU2" userLabel="Phone">
                                                             <rect key="frame" x="0.0" y="0.0" width="155" height="25"/>
@@ -275,7 +283,7 @@
                         <viewControllerLayoutGuide type="bottom" id="BkR-9o-gAg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b1T-3r-SBy">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="firstname" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5tP-gA-Nq3" userLabel="FirstName Textfield">
@@ -367,38 +375,38 @@
                         <viewControllerLayoutGuide type="bottom" id="Tp8-XD-hw1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="w8o-Ro-0hN">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuJ-SE-34Y">
-                                <rect key="frame" x="20" y="74" width="627" height="182"/>
+                                <rect key="frame" x="16" y="74" width="343" height="182"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="firstname" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SzK-wi-Jch" userLabel="FirstName Textfield">
-                                        <rect key="frame" x="0.0" y="0.0" width="627" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="lastname" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vmj-Tr-562" userLabel="LastName TextField">
-                                        <rect key="frame" x="0.0" y="38" width="627" height="30"/>
+                                        <rect key="frame" x="0.0" y="38" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="company" borderStyle="roundedRect" placeholder="Company" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Wf-9v-Oef">
-                                        <rect key="frame" x="0.0" y="76" width="627" height="30"/>
+                                        <rect key="frame" x="0.0" y="76" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email" borderStyle="roundedRect" placeholder="sample@youremail.domain" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2HZ-7j-yNu" userLabel="Email">
-                                        <rect key="frame" x="0.0" y="114" width="627" height="30"/>
+                                        <rect key="frame" x="0.0" y="114" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="phone" borderStyle="roundedRect" placeholder="000-000-000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pTO-hR-Me1" userLabel="Phone">
-                                        <rect key="frame" x="0.0" y="152" width="627" height="30"/>
+                                        <rect key="frame" x="0.0" y="152" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -436,6 +444,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFT-pM-ACR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2951" y="567"/>
+        </scene>
+        <!--My Card-->
+        <scene sceneID="CAN-2i-75b">
+            <objects>
+                <viewController id="tGV-Op-ds4" customClass="MyCardViewController" customModule="Linked_Cards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XUn-Ae-4Ub"/>
+                        <viewControllerLayoutGuide type="bottom" id="yUl-zq-cde"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HyM-dS-w6e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dTC-8I-V7z">
+                                <rect key="frame" x="10" y="74" width="355" height="182"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="firstname" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAq-3N-QC5" userLabel="FirstName Textfield">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="lastname" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tEb-lw-T3j" userLabel="LastName TextField">
+                                        <rect key="frame" x="0.0" y="38" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="company" borderStyle="roundedRect" placeholder="Company" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xe-gc-Pae">
+                                        <rect key="frame" x="0.0" y="76" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email" borderStyle="roundedRect" placeholder="sample@youremail.domain" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lAu-vv-uX5" userLabel="Email">
+                                        <rect key="frame" x="0.0" y="114" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="phone" borderStyle="roundedRect" placeholder="000-000-000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="suj-jo-E47" userLabel="Phone">
+                                        <rect key="frame" x="0.0" y="152" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dTC-8I-V7z" firstAttribute="leading" secondItem="HyM-dS-w6e" secondAttribute="leading" constant="10" id="3MZ-h9-7V8"/>
+                            <constraint firstAttribute="trailing" secondItem="dTC-8I-V7z" secondAttribute="trailing" constant="10" id="SnI-W7-VmR"/>
+                            <constraint firstItem="dTC-8I-V7z" firstAttribute="top" secondItem="XUn-Ae-4Ub" secondAttribute="bottom" constant="10" id="UOO-Yl-Spb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Card" id="nsu-eM-P4F">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="djg-j9-jan">
+                            <connections>
+                                <action selector="cancelButtonAction:" destination="tGV-Op-ds4" id="oma-y0-w4P"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xG5-Nc-wAR">
+                            <connections>
+                                <action selector="saveButtonAction:" destination="tGV-Op-ds4" id="3ZE-lk-XAx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="companyTextField" destination="6xe-gc-Pae" id="8JC-wn-IcD"/>
+                        <outlet property="emailTextField" destination="lAu-vv-uX5" id="pqh-jX-Apm"/>
+                        <outlet property="firstNameTextField" destination="PAq-3N-QC5" id="c6l-NX-syA"/>
+                        <outlet property="lastNameTextField" destination="tEb-lw-T3j" id="GDD-fa-GMh"/>
+                        <outlet property="phoneTextField" destination="suj-jo-E47" id="bae-Cd-ecz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gcO-ZK-hXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1165.5999999999999" y="935.98200899550227"/>
         </scene>
     </scenes>
 </document>

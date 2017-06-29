@@ -31,7 +31,7 @@ class CardCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = 30
         self.layer.masksToBounds = true
     }
 

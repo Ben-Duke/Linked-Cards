@@ -14,7 +14,8 @@ protocol CardSwapServiceManagerDelegate {
     
     func connectedDevicesChanged(manager : CardSwapBLEModel, connectedDevices: [String])
     func CardSwapfunc(manager : CardSwapBLEModel, cardToSwap: String)
-    
+    func CardReceived(cardReceived: Card)
+    func ConnectedDevice(connected: Bool)
 }
 
 class CardSwapBLEModel : NSObject {
@@ -22,10 +23,15 @@ class CardSwapBLEModel : NSObject {
     private let CardSwapServiceType = "CardSwap"
     
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
-    
+    public var connected = false
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     private let serviceBrowser : MCNearbyServiceBrowser
+   
+    var swappedWithId : MCPeerID?//*******
+    var iSent : Bool = false
     
+    
+    var myCard : Card?
     var delegate : CardSwapServiceManagerDelegate?
     
     lazy var session : MCSession = {
@@ -55,14 +61,18 @@ class CardSwapBLEModel : NSObject {
         NSLog("%@", "sendCard: \(cardJSON) to \(session.connectedPeers.count) peers")
         
         if session.connectedPeers.count > 0 {
+            iSent = true
             do {
                 
                 try self.session.send(cardJSON.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+                
             }
             catch let error {
                 NSLog("%@", "Error for sending: \(error)")
             }
+            
         }
+        
         
     }
     
@@ -110,31 +120,37 @@ extension CardSwapBLEModel : MCSessionDelegate {
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            self.delegate?.connectedDevicesChanged(manager: self, connectedDevices: session.connectedPeers.map{$0.displayName})
+            self.connected = true
+            self.delegate?.ConnectedDevice(connected: true)
             
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
+            self.delegate?.ConnectedDevice(connected: false)
             
         case MCSessionState.notConnected:
             print("Not Connected: \(peerID.displayName)")
+            self.delegate?.ConnectedDevice(connected: false)
         }
- 
+        
         self.delegate?.connectedDevicesChanged(manager: self, connectedDevices:
             session.connectedPeers.map{$0.displayName})
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
-
+        
         let cardJson = String(data: data, encoding: .utf8)!
-        print(1)
         self.delegate?.CardSwapfunc(manager: self, cardToSwap: cardJson )
         
         var saveCard = Card(referencedId: nil, firstName: nil, lastName: nil,company: nil, email: nil, phone: nil)
-           saveCard = saveCard.jsonToCard(cardJson: cardJson)
+        saveCard = saveCard.jsonToCard(cardJson: cardJson)
         
         UpdateCardDatabase().saveCard(firstname: saveCard.firstName!, lastname: saveCard.lastName!, company: saveCard.company!, email: saveCard.email!, phone: saveCard.phone!)
-        print("would send to core data")
+        
+        self.delegate?.CardReceived(cardReceived:saveCard)
+        
+        
+        //sendBack()
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -149,4 +165,10 @@ extension CardSwapBLEModel : MCSessionDelegate {
         NSLog("%@", "didFinishReceivingResourceWithName")
     }
     
+    func sendBack() {
+        if iSent == false {
+            self.send(cardJSON: (myCard?.cardToJson())!)
+            print("returning Card")
+        }
+    }
 }

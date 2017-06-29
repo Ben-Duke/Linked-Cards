@@ -7,7 +7,15 @@
         <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="MyCard" representedClassName="Card" syncable="YES">
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Card" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="MyCard" positionX="-54" positionY="27" width="128" height="120"/>
     </elements>
 </model>

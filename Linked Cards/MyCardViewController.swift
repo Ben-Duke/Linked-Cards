@@ -10,26 +10,79 @@ import UIKit
 
 class MyCardViewController: UIViewController {
 
+    //MARK: Properties
+    var myCard : Card?
+    var myCards = [Card]()
+    
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    
+    //MARK: Actions
+    
+    @IBAction func saveButtonAction(_ sender: UIBarButtonItem) {
+        //Save functionality
+        
+        if myCard != nil {
+            MyCardModel().EditCard(card: myCard!, valuesToEdit: [firstNameTextField.text!, lastNameTextField.text!, companyTextField.text!, emailTextField.text!, phoneTextField.text!])
+        }else {
+            MyCardModel().saveCard(firstname: firstNameTextField.text!, lastname: lastNameTextField.text!, company: companyTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!)
+        }
+        
+        performSegueReturnBack()
+    }
+    
+    @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
+        performSegueReturnBack()
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        let myCards = MyCardModel().GetCardsFromCoreData()
+        
+        if myCards.count > 0 {
+            myCard = myCards[0]
+        }
+        
+        if myCard != nil{
+            setUpView()
+        }
+        else{
+            print("was nil")
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setUpView() {
+        firstNameTextField.text = myCard?.firstName
+        lastNameTextField.text = myCard?.lastName
+        companyTextField.text = myCard?.company
+        emailTextField.text = myCard?.email
+        phoneTextField.text = myCard?.phone
     }
-    */
-
+    
+    
+}
+extension UIViewController {
+    fileprivate func performSegueReturnBack(){
+        
+        if let nav = self.navigationController{
+            nav.popViewController(animated: true)
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }

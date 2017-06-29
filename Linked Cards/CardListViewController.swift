@@ -70,6 +70,14 @@ extension CardListViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell") as! CardCellTableViewCell
         cell.setUpCard(card: cards[indexPath.row])
         
+        cell.layer.cornerRadius = 10
+        let shadowPath2 = UIBezierPath(rect: cell.bounds)
+        cell.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: CGFloat(1.0), height: CGFloat(3.0))
+        cell.layer.shadowOpacity = 0.5
+        cell.layer.shadowPath = shadowPath2.cgPath
+        
         return cell
     }
     
