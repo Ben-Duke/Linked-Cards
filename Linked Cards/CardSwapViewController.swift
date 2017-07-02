@@ -17,8 +17,9 @@ class CardSwapViewController: UIViewController, CardSwapServiceManagerDelegate {
     var cards : [Card] = []
     var model = MyCardModel()
     
-    @IBOutlet weak var readyLabel: UILabel!
     
+    @IBOutlet weak var readyLabel: UILabel!
+    @IBOutlet weak var connectedLabel: UILabel!
     @IBOutlet weak var SendJsonButton: UIButton!
     
     
@@ -31,10 +32,17 @@ class CardSwapViewController: UIViewController, CardSwapServiceManagerDelegate {
         super.viewDidLoad()
         
         bleModel.delegate = self
-        SendJsonButton.isEnabled = false
         cards = model.GetCardsFromCoreData()
+        startUp()
         
+    }
+    
+    func startUp() {
         SendJsonButton.layer.cornerRadius = 30
+        SendJsonButton.isEnabled = false
+        SendJsonButton.isHidden = true
+        
+    
         
         if cards.count > 0{
             myCard = cards[0]
@@ -47,17 +55,24 @@ class CardSwapViewController: UIViewController, CardSwapServiceManagerDelegate {
             
             self.present(alert, animated: true, completion: nil)
         }
-        
     }
     
     func connectedDevicesChanged(manager : CardSwapBLEModel, connectedDevices: [String]){
         print(connectedDevices.count)
-        if (connectedDevices.count > 0 && myCard != nil){
-            DispatchQueue.main.async {
-                self.SendJsonButton.isEnabled = true
+        if myCard != nil {
+            if connectedDevices.count > 0 {
+                DispatchQueue.main.async {
+                    self.labelUpdate(num: connectedDevices.count)
+                    self.SendJsonButton.isHidden = false
+                    self.SendJsonButton.isEnabled = true
+                }
+            }
+            else{
+                DispatchQueue.main.async {
+                    self.SendJsonButton.isHidden = true
+                }
             }
         }
-        
     }
     
     func CardSwapfunc(manager : CardSwapBLEModel, cardToSwap: String){
@@ -69,6 +84,15 @@ class CardSwapViewController: UIViewController, CardSwapServiceManagerDelegate {
             self.readyLabel.text! = "\(cardReceived.firstName!)'s card received "
         }
         
+    }
+    
+    func labelUpdate(num:Int?) {
+        if num != nil{
+            connectedLabel.text = "Connected people: \(num!)"
+        }
+        else{
+            connectedLabel.text = "No one is Connected"
+        }
     }
     
     func ConnectedDevice(connected: Bool) {

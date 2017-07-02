@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU5-cl-oEd">
-                                <rect key="frame" x="10" y="211" width="355" height="26"/>
+                                <rect key="frame" x="10" y="214" width="355" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="L39-ZM-zNa"/>
                                 </constraints>
@@ -36,7 +35,6 @@
                                 <rect key="frame" x="50" y="291" width="275" height="85"/>
                                 <color key="backgroundColor" red="0.93345773200000004" green="1" blue="0.98585641989999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="CrR-3X-fL5" secondAttribute="height" multiplier="55:17" id="4un-35-3ER"/>
                                     <constraint firstAttribute="height" constant="85" id="UfW-cl-RL9"/>
                                     <constraint firstAttribute="width" constant="275" id="m6u-JC-0cI"/>
                                 </constraints>
@@ -53,21 +51,32 @@
                                     <action selector="sendCardJSONAction:" destination="VVS-pd-Uc8" eventType="touchUpInside" id="1Yo-Oy-Vbm"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one is connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-2r-4fd" userLabel="Connection Label">
+                                <rect key="frame" x="0.0" y="179" width="375" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="7Fq-0o-lEl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CrR-3X-fL5" firstAttribute="top" secondItem="SU5-cl-oEd" secondAttribute="bottom" constant="54" id="9Kg-6C-MMq"/>
-                            <constraint firstItem="CrR-3X-fL5" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leadingMargin" constant="34" id="HPd-pD-jO7"/>
-                            <constraint firstItem="SU5-cl-oEd" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leading" constant="10" id="I7B-Cl-peC"/>
-                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerY" secondItem="lBU-AP-Hbv" secondAttribute="centerY" id="Pmo-8d-LRo"/>
-                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerX" secondItem="SU5-cl-oEd" secondAttribute="centerX" id="Qvt-R5-BhO"/>
-                            <constraint firstAttribute="trailing" secondItem="SU5-cl-oEd" secondAttribute="trailing" constant="10" id="Wd3-DP-r6D"/>
-                            <constraint firstItem="CrR-3X-fL5" firstAttribute="top" secondItem="SU5-cl-oEd" secondAttribute="bottom" constant="54" id="c6U-z2-gza"/>
-                            <constraint firstItem="Ujw-QK-qMY" firstAttribute="top" secondItem="CrR-3X-fL5" secondAttribute="bottom" constant="291" id="vH3-S1-saU"/>
+                            <constraint firstItem="SU5-cl-oEd" firstAttribute="top" secondItem="PPa-2r-4fd" secondAttribute="bottom" constant="10" id="2C1-fM-Wij"/>
+                            <constraint firstItem="PPa-2r-4fd" firstAttribute="top" secondItem="tEA-PE-xR0" secondAttribute="bottom" constant="115" id="4eW-Xe-N6U"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerY" secondItem="lBU-AP-Hbv" secondAttribute="centerY" id="CVh-pT-6Oq"/>
+                            <constraint firstItem="PPa-2r-4fd" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leading" id="HXl-BN-5Qa"/>
+                            <constraint firstItem="SU5-cl-oEd" firstAttribute="leading" secondItem="lBU-AP-Hbv" secondAttribute="leading" constant="10" id="Lxb-Rs-dcX"/>
+                            <constraint firstAttribute="trailing" secondItem="SU5-cl-oEd" secondAttribute="trailing" constant="10" id="QhD-lW-0jq"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="top" secondItem="SU5-cl-oEd" secondAttribute="bottom" constant="51" id="bUZ-Zw-Ydp"/>
+                            <constraint firstItem="CrR-3X-fL5" firstAttribute="centerX" secondItem="lBU-AP-Hbv" secondAttribute="centerX" id="oeS-x5-CK6"/>
+                            <constraint firstAttribute="trailing" secondItem="PPa-2r-4fd" secondAttribute="trailing" id="sOn-30-enL"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="SendJsonButton" destination="CrR-3X-fL5" id="Mf5-2G-Ymi"/>
+                        <outlet property="connectedLabel" destination="PPa-2r-4fd" id="H3k-yz-wl4"/>
                         <outlet property="readyLabel" destination="SU5-cl-oEd" id="PfO-aF-cRw"/>
                     </connections>
                 </viewController>
